@@ -28,6 +28,9 @@ spec:
       initContainers:
         - name: init-create-db
           image: mysql:8
+          envFrom:
+           - secretRef: 
+              name: schoolrider-secrets
           command: ["sh", "-c"]
           args:
             - |
