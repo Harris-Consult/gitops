@@ -1,0 +1,33 @@
+authVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schoolrider-auth
+  namespace: schoolrider
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: schoolrider-auth
+  template:
+    metadata:
+      labels:
+        app: schoolrider-auth
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/worker: worker
+
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: "kubernetes.io/hostname"
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: schoolrider-auth
+      containers:
+      - name: schoolrider-auth
+        image: ghcr.io/harris-consult/schoolrider-auth:latest
+        ports:
+        - containerPort: 9013
+        envFrom:
+        - secretRef:
+            name: schoolrider-secrets

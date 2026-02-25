@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: schoolrider-webapp
+  name: schoolrider-app
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
-    repoURL: https://github.com/churchlify/churchlify-gitops.git
-    path: apps/schoolrider/webapp/overlays/production
+    repoURL: https://github.com/Harris-Consult/gitops.git
+    path: apps/schoolrider/app/overlays/production
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc
