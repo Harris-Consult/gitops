@@ -31,7 +31,7 @@ spec:
         - containerPort: 9012
         readinessProbe:
           httpGet:
-            path: /api/health # Or whatever your health endpoint is
+            path: /health # Or whatever your health endpoint is
             port: 9012
           initialDelaySeconds: 5
           periodSeconds: 10
