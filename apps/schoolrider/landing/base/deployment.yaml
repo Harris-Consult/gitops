@@ -28,7 +28,7 @@ spec:
       - name: schoolrider-web
         image: ghcr.io/harris-consult/schoolrider-landing:latest
         ports:
-        - containerPort: 9012
+        - containerPort: 9011
         envFrom:
         - secretRef:
             name: schoolrider-secrets
