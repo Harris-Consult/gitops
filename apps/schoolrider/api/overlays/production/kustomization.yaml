@@ -1,2 +1,8 @@
 resources:
-  - ../../base
+- ../../base
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: ghcr.io/harris-consult/schoolrider-api
+  newName: ghcr.io/harris-consult/schoolrider-api
+  newTag: cad597e927a0049c4ee6f9e9be6d0a363e538590
