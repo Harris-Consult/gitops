@@ -8,4 +8,4 @@ spec:
     app: schoolrider-auth
   ports:
   - port: 80
-    targetPort: 9012
+    targetPort: 9013
