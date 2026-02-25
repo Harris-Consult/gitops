@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schoolrider-api
+  namespace: schoolrider
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: schoolrider-api
+  template:
+    metadata:
+      labels:
+        app: schoolrider-api
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/worker: worker
+
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: "kubernetes.io/hostname"
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: schoolrider-api
+
+      containers:
+      - name: schoolrider-api
+        image: ghcr.io/harris-consult/schoolrider-api:latest
+        ports:
+        - containerPort: 9012
+        readinessProbe:
+          httpGet:
+            path: /api/health # Or whatever your health endpoint is
+            port: 9012
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+        # Load app-specific env vars
+        envFrom:
+        - secretRef:
+            name: schoolrider-secrets
+
+        volumeMounts:
+        - name: files
+          mountPath: /usr/src/app/files_upload
+
+      volumes:
+      - name: files
+        persistentVolumeClaim:
+          claimName: schoolrider-api-files
