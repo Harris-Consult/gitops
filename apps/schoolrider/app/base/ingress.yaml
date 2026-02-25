@@ -5,6 +5,7 @@ metadata:
   namespace: schoolrider
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/rewrite-target: /app$1
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
@@ -17,7 +18,7 @@ spec:
   - host: app.schoolrider.com
     http:
       paths:
-      - path: /
+      - path: /(.*)
         pathType: Prefix
         backend:
           service:
