@@ -31,13 +31,13 @@ spec:
           command: ["sh", "-c"]
           args:
             - |
-              echo "Waiting for MySQL..."
-              until mysqladmin ping -h mysql --silent; do
+              echo "Waiting for MySQL at $MYSQL_HOST..."
+              until mysqladmin ping -h "$MYSQL_HOST" --silent; do
                 sleep 2
               done
 
               echo "Creating database if not exists..."
-              mysql -h mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" \
+              mysql -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" \
                 -e "CREATE DATABASE IF NOT EXISTS schoolrider;"
 
       containers:
