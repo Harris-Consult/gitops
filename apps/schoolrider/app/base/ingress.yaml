@@ -17,7 +17,7 @@ spec:
   - host: app.schoolrider.com
     http:
       paths:
-      - path: /
+      - path: /app
         pathType: Prefix
         backend:
           service:
