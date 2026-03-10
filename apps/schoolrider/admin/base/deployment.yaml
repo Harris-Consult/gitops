@@ -28,7 +28,7 @@ spec:
       - name: schoolrider-admin
         image: ghcr.io/harris-consult/schoolrider-admin:latest
         ports:
-        - containerPort: 9014
+        - containerPort: 9015
 
         envFrom:
         - secretRef:
