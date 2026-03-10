@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-vision-app
+  namespace: blue-vision
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blue-vision-app
+  template:
+    metadata:
+      labels:
+        app: blue-vision-app
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/worker: worker
+
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: "kubernetes.io/hostname"
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: blue-vision-app
+
+      containers:
+      - name: blue-vision-app
+        image: ghcr.io/harris-consult/blue-vision-app:latest
+        ports:
+        - containerPort: 9014
+
+        envFrom:
+        - secretRef:
+            name: blue-vision-secrets
+
+        volumeMounts:
+        - name: files
+          mountPath: /usr/src/app/files_upload
+
+      volumes:
+      - name: files
+        persistentVolumeClaim:
+          claimName: blue-vision-app-files

@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue-vision-api
+  namespace: blue-vision
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blue-vision-api
+  template:
+    metadata:
+      labels:
+        app: blue-vision-api
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/worker: worker
+
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: "kubernetes.io/hostname"
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: blue-vision-api
+
+      # 🔥 Init container to create DB before app starts
+      initContainers:
+        - name: init-create-db
+          image: mysql:8
+          envFrom:
+           - secretRef: 
+              name: blue-vision-secrets
+          command: ["sh", "-c"]
+          args:
+            - |
+              echo "Waiting for MySQL at $MYSQL_HOST..."
+              until mysqladmin ping -h "$MYSQL_HOST" --silent; do
+                sleep 2
+              done
+
+              echo "Creating database if not exists..."
+              mysql -h "$MYSQL_HOST" -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" \
+                -e "CREATE DATABASE IF NOT EXISTS blue-vision;"
+
+      containers:
+      - name: blue-vision-api
+        image: ghcr.io/harris-consult/blue-vision-api:latest
+        ports:
+        - containerPort: 9012
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 9012
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
+        envFrom:
+        - secretRef:
+            name: blue-vision-secrets
+
+        volumeMounts:
+        - name: files
+          mountPath: /usr/src/app/files_upload
+
+      volumes:
+      - name: files
+        persistentVolumeClaim:
+          claimName: blue-vision-api-files

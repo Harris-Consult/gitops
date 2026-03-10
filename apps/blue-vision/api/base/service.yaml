@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: blue-vision-api
+  namespace: blue-vision
+spec:
+  selector:
+    app: blue-vision-api
+  ports:
+  - port: 80
+    targetPort: 9012
