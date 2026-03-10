@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: schoolrider-app
+  name: schoolrider-admin
   namespace: schoolrider
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: schoolrider-app
+      app: schoolrider-admin
   template:
     metadata:
       labels:
-        app: schoolrider-app
+        app: schoolrider-admin
     spec:
       nodeSelector:
         node-role.kubernetes.io/worker: worker
@@ -22,23 +22,14 @@ spec:
           whenUnsatisfiable: ScheduleAnyway
           labelSelector:
             matchLabels:
-              app: schoolrider-app
+              app: schoolrider-admin
 
       containers:
-      - name: schoolrider-app
-        image: ghcr.io/harris-consult/schoolrider-app:latest
+      - name: schoolrider-admin
+        image: ghcr.io/harris-consult/schoolrider-admin:latest
         ports:
         - containerPort: 9014
 
         envFrom:
         - secretRef:
             name: schoolrider-secrets
-
-        volumeMounts:
-        - name: files
-          mountPath: /usr/src/app/files_upload
-
-      volumes:
-      - name: files
-        persistentVolumeClaim:
-          claimName: schoolrider-app-files
