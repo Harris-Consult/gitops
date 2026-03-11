@@ -11,7 +11,7 @@ spec:
   ingressClassName: nginx # Explicitly define your controller
   tls:
   - hosts:
-    - api.bluevisionltdcom
+    - api.bluevisionltd.com
     secretName: blue-vision-api-tls # Cert-manager will create this secret
   rules:
   - host: api.bluevisionltd.com
