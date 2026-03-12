@@ -28,7 +28,7 @@ spec:
       - name: blue-vision-app
         image: ghcr.io/harris-consult/blue-vision-app:latest
         ports:
-        - containerPort: 4173
+        - containerPort: 3000
 
         envFrom:
         - secretRef:
