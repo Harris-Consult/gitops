@@ -28,17 +28,8 @@ spec:
       - name: blue-vision-app
         image: ghcr.io/harris-consult/blue-vision-app:latest
         ports:
-        - containerPort: 9014
+        - containerPort: 3000
 
         envFrom:
         - secretRef:
             name: blue-vision-secrets
-
-        volumeMounts:
-        - name: files
-          mountPath: /usr/src/app/files_upload
-
-      volumes:
-      - name: files
-        persistentVolumeClaim:
-          claimName: blue-vision-app-files

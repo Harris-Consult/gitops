@@ -8,4 +8,4 @@ spec:
     app: blue-vision-app
   ports:
   - port: 80
-    targetPort: 9014
+    targetPort: 3000
