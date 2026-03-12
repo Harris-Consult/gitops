@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: ghcr.io/harris-consult/blue-vision-app
   newName: ghcr.io/harris-consult/blue-vision-app
-  newTag: bd9b7d0e9512c64ca9ee2be16d8b54cf6bfe8c08
+  newTag: 60df92404e0559959367ff86f43e5b4ef261ae8f
