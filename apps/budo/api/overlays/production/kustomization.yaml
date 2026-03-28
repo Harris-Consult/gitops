@@ -4,4 +4,4 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
 - name: ghcr.io/harris-consult/budo-api
-  newTag: 9573597d2de25386cbe80b28595c6dd4afe9c328
+  newTag: 3fa8f4a2776676d5897bcf2d24c01ba02404bc90
