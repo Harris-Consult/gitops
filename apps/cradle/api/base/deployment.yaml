@@ -15,7 +15,7 @@ spec:
     spec:
       nodeSelector:
         node-role.kubernetes.io/worker: worker
-        
+
       initContainers:
         - name: init-create-db
           image: mysql:8.0
@@ -50,7 +50,7 @@ spec:
       - name: cradle-api
         image: ghcr.io/harris-consult/cradle-api:latest
         ports:
-        - containerPort: 5000
+        - containerPort: 5001
 
         envFrom:
         - secretRef:
