@@ -1,2 +1,8 @@
 resources:
 - ../../base
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: ghcr.io/harris-consult/blue-vision-api
+  newName: ghcr.io/harris-consult/blue-vision-api
+  newTag: 9b2a2514060df3a076164c4e68b37bf5ab75d793
