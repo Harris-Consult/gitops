@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: ghcr.io/harris-consult/blue-vision-api
   newName: ghcr.io/harris-consult/blue-vision-api
-  newTag: e922ef87d1aecbcfda2d894c84bbbc8aed2da3ce
+  newTag: e502c67aa6ec371cc916dcd2b94197ff06a80160
