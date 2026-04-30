@@ -24,12 +24,41 @@ spec:
             matchLabels:
               app: blue-vision-api
 
-      containers:
-      - name: blue-vision-api
-        image: ghcr.io/harris-consult/blue-vision-api:latest
-        ports:
-        - containerPort: 5000
+      initContainers:
+        - name: mongo-reset
+          image: mongo:7
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo "Waiting for MongoDB..."
+              until mongosh "$MONGO_URI" --eval "db.runCommand({ ping: 1 })" >/dev/null 2>&1; do
+                sleep 2
+              done
 
-        envFrom:
-        - secretRef:
-            name: blue-vision-secrets
+              echo "🔄 Resetting MongoDB database..."
+              mongosh "$MONGO_URI" --eval "db.dropDatabase()"
+              echo "✅ MongoDB reset complete."
+          envFrom:
+            - secretRef:
+                name: blue-vision-secrets
+
+      containers:
+        - name: blue-vision-api
+          image: ghcr.io/harris-consult/blue-vision-api:latest
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - secretRef:
+                name: blue-vision-secrets
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
