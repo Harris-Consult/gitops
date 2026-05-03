@@ -17,7 +17,7 @@ spec:
         - name: api
           image: ghcr.io/harris-consult/colcare-api:latest
           imagePullPolicy: Always
-          command: ["node", "dist/server.js"]
+          command: ["node", "dist/src/server.js"]
           ports:
             - containerPort: 4000
           envFrom:
