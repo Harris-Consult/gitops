@@ -10,10 +10,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - api.colcare.com
+        - api.colcare.harrisconsult.org
       secretName: colcare-api-tls
   rules:
-    - host: api.colcare.com
+    - host: api.colcare.harrisconsult.org
       http:
         paths:
           - path: /
