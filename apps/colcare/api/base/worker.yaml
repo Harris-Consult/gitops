@@ -17,7 +17,7 @@ spec:
         - name: worker
           image: ghcr.io/harris-consult/colcare-api:latest
           imagePullPolicy: Always
-          command: ["node", "dist/jobs/worker.main.js"]
+          command: ["node", "dist/src/jobs/worker.main.js"]
           envFrom:
             - secretRef:
                 name: colcare-secrets
