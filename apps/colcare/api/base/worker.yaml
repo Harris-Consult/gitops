@@ -20,4 +20,4 @@ spec:
           command: ["node", "dist/jobs/worker.main.js"]
           envFrom:
             - secretRef:
-                name: colcare-api-secrets
+                name: colcare-secrets

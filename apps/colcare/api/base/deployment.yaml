@@ -22,7 +22,7 @@ spec:
             - containerPort: 4000
           envFrom:
             - secretRef:
-                name: colcare-api-secrets
+                name: colcare-secrets
           readinessProbe:
             httpGet:
               path: /api/health
