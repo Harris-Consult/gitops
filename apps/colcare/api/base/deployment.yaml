@@ -14,25 +14,17 @@ spec:
         app: colcare-api
     spec:
       initContainers:
-        - name: db-init
-          image: postgres:15
-          command: ["sh", "-c"]
-          args:
-            - |
-              echo "Waiting for DB..."
-              until pg_isready -h pgsql-postgresql.platform.svc.cluster.local -p 5432; do
-                sleep 2
-              done
-              echo "DB is ready!"
-
         - name: prisma-migrate
           image: ghcr.io/harris-consult/colcare-api:latest
-          command: ["sh", "-c"]
+          workingDir: /app # <--- CRITICAL: Ensure this matches your Dockerfile WORKDIR
+          command: ["/bin/sh", "-c"]
           args:
             - |
-              echo "Running prisma migrations"
-              npx prisma migrate deploy
-
+              # Force Prisma to ignore the config loader and use the env var directly
+              npx prisma migrate deploy --schema ./prisma/schema.prisma
+          envFrom:
+            - secretRef:
+                name: colcare-secrets
       containers:
         - name: api
           image: ghcr.io/harris-consult/colcare-api:latest
