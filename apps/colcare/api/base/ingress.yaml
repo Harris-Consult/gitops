@@ -6,7 +6,12 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location ^~ /.well-known/acme-challenge/ {
+        allow all;
+        try_files $uri =404;
+      }
 spec:
   ingressClassName: nginx
   tls:
