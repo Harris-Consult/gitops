@@ -13,6 +13,26 @@ spec:
       labels:
         app: colcare-api
     spec:
+      initContainers:
+        - name: db-init
+          image: postgres:15
+          command: ["sh", "-c"]
+          args:
+            - |
+              echo "Waiting for DB..."
+              until pg_isready -h pgsql-postgresql.platform.svc.cluster.local -p 5432; do
+                sleep 2
+              done
+              echo "DB is ready!"
+
+        - name: prisma-migrate
+          image: ghcr.io/harris-consult/colcare-api:latest
+          command: ["sh", "-c"]
+          args:
+            - |
+              echo "Running prisma migrations"
+              npx prisma migrate deploy
+
       containers:
         - name: api
           image: ghcr.io/harris-consult/colcare-api:latest
