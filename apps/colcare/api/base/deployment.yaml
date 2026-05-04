@@ -20,7 +20,6 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              # Force Prisma to ignore the config loader and use the env var directly
               npx prisma migrate deploy --schema ./prisma/schema.prisma
           envFrom:
             - secretRef:
@@ -35,15 +34,15 @@ spec:
           envFrom:
             - secretRef:
                 name: colcare-secrets
-          readinessProbe:
-            httpGet:
-              path: /api/health
-              port: 4000
-            initialDelaySeconds: 10
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /api/health
-              port: 4000
-            initialDelaySeconds: 30
-            periodSeconds: 20
+          # readinessProbe:
+          #   httpGet:
+          #     path: /api/health
+          #     port: 4000
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /api/health
+          #     port: 4000
+          #   initialDelaySeconds: 30
+          #   periodSeconds: 20
