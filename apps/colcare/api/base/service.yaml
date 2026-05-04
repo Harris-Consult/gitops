@@ -6,6 +6,6 @@ metadata:
 spec:
   selector:
     app: colcare-api
-  ports:
-    port: 80
+ports:
+  - port: 80
     targetPort: 4000
