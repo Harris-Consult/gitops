@@ -8,6 +8,11 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
     acme.cert-manager.io/http01-edit-in-place: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location ^~ /.well-known/acme-challenge/ {
+        allow all;
+        try_files $uri =404;
+      }
 spec:
   ingressClassName: nginx
   tls:
