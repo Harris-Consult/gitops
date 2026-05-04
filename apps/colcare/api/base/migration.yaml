@@ -10,7 +10,10 @@ spec:
       containers:
         - name: migrate
           image: ghcr.io/harris-consult/colcare-api:latest
-          command: ["npx", "prisma", "migrate", "deploy"]
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              npx prisma migrate deploy --schema ./prisma/schema.prisma
           envFrom:
             - secretRef:
                 name: colcare-secrets
