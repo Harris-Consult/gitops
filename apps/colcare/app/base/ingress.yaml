@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: colcare-api-ingress
+  namespace: colcare
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location ^~ /.well-known/acme-challenge/ {
+        allow all;
+        try_files $uri =404;
+      }
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - app.colcare.harrisconsult.org
+      secretName: colcare-api-tls
+  rules:
+    - host: app.colcare.harrisconsult.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: colcare-app
+                port:
+                  number: 80
