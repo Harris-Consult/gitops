@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: budo-web
+  namespace: budo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: budo-web
+  template:
+    metadata:
+      labels:
+        app: budo-web
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/worker: worker
+
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: "kubernetes.io/hostname"
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: budo-web
+
+      containers:
+        - name: budo-web
+          image: ghcr.io/harris-consult/budo-web:latest
+          ports:
+            - containerPort: 5000
+
+          envFrom:
+            - secretRef:
+                name: budo-secrets
