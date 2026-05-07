@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: colcare-api-ingress
+  name: colcare-app-ingress
   namespace: colcare
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
@@ -17,7 +17,7 @@ spec:
   tls:
     - hosts:
         - app.colcare.harrisconsult.org
-      secretName: colcare-api-tls
+      secretName: colcare-app-tls
   rules:
     - host: app.colcare.harrisconsult.org
       http:
