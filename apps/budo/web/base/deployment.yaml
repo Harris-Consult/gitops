@@ -28,7 +28,7 @@ spec:
         - name: budo-web
           image: ghcr.io/harris-consult/budo-web:latest
           ports:
-            - containerPort: 5000
+            - containerPort: 80
 
           envFrom:
             - secretRef:
