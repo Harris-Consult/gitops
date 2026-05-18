@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: ghcr.io/harris-consult/schoolrider-landing
   newName: ghcr.io/harris-consult/schoolrider-landing
-  newTag: 4a27e4be88b2a386088f2a81e0804ab9aa83ea30
+  newTag: e2074b93f6f6b44f0988dc3db06f458478a96b5e
