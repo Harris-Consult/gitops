@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: ghcr.io/harris-consult/budo-app
   newName: ghcr.io/harris-consult/budo-app
-  newTag: c2103c577afa393e373c278098620177dc83229b
+  newTag: 5829b88ede35d089317f8ece8491944a82461518
