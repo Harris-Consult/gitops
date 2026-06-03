@@ -33,3 +33,15 @@ spec:
           envFrom:
             - secretRef:
                 name: tkproster-secrets
+          volumeMounts:
+            - name: firebase-volume
+              mountPath: /app/firebase-service-account.json
+              subPath: firebase-service-account.json
+              readOnly: true
+      volumes:
+        - name: firebase-volume
+          secret:
+            secretName: tkproster-secrets
+            items:
+              - key: FIREBASE_CONFIG
+                path: firebase-service-account.json
