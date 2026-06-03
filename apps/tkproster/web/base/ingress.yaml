@@ -11,7 +11,7 @@ spec:
   ingressClassName: nginx # Explicitly define your controller
   tls:
     - hosts:
-        - web.letsbudo.com
+        - web.tkproster.com
       secretName: tkproster-web-tls # Cert-manager will create this secret
   rules:
     - host: web.tkproster.com
