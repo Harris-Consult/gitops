@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: ghcr.io/harris-consult/budo-web
   newName: ghcr.io/harris-consult/budo-web
-  newTag: fdc4d7e36019653ddbb893dae562cc26f2820a8b
+  newTag: 7ab11f91d4dc641136aff307799b24c3d732ed81
