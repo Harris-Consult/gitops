@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tkproster-web
+  namespace: tkproster
+spec:
+  selector:
+    app: tkproster-web
+  ports:
+    - port: 80
+      targetPort: 80

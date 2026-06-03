@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tkproster-web-ingress
+  namespace: tkproster
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx # Explicitly define your controller
+  tls:
+    - hosts:
+        - web.letsbudo.com
+      secretName: tkproster-web-tls # Cert-manager will create this secret
+  rules:
+    - host: web.tkproster.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tkproster-web # MUST match the metadata.name of your Service
+                port:
+                  number: 80

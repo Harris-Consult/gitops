@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tkproster-api
+  namespace: tkproster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tkproster-api
+  template:
+    metadata:
+      labels:
+        app: tkproster-api
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/worker: worker
+
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: "kubernetes.io/hostname"
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: tkproster-api
+
+      containers:
+        - name: tkproster-api
+          image: ghcr.io/harris-consult/tkp-traffic-api:latest
+          ports:
+            - containerPort: 5000
+
+          envFrom:
+            - secretRef:
+                name: tkproster-secrets
