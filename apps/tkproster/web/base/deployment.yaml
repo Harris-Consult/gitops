@@ -29,6 +29,9 @@ spec:
           image: ghcr.io/harris-consult/tkp-traffic-web:latest
           ports:
             - containerPort: 3000
+          env:
+            - name: HOSTNAME
+              value: "0.0.0.0"
 
           envFrom:
             - secretRef:
