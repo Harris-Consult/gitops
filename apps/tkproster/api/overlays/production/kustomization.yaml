@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: ghcr.io/harris-consult/tkp-traffic-api
   newName: ghcr.io/harris-consult/tkp-traffic-api
-  newTag: 97cd7d5d331cf30a763b1481e0087d9f88f8023d
+  newTag: 32d8a435d1ebb478b1bbee8e1978bcffedb039fe
