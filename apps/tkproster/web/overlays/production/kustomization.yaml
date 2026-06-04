@@ -1,2 +1,8 @@
 resources:
-  - ../../base
+- ../../base
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: ghcr.io/harris-consult/tkp-traffic-web
+  newName: ghcr.io/harris-consult/tkp-traffic-web
+  newTag: 74d036c252b64b787df217bcb15d68cfe5cfe511
