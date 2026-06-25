@@ -11,7 +11,7 @@ spec:
   ingressClassName: nginx # Explicitly define your controller
   tls:
     - hosts:
-        - web.cradle.harrisconsult.org
+        - cradle.harrisconsult.org
       secretName: cradle-website-tls # Cert-manager will create this secret
   rules:
     - host: cradle.harrisconsult.org
