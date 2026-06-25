@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cradle-website
+  namespace: cradle
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cradle-website
+  template:
+    metadata:
+      labels:
+        app: cradle-website
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/worker: worker
+
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: "kubernetes.io/hostname"
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: cradle-website
+
+      containers:
+        - name: cradle-website
+          image: ghcr.io/harris-consult/cradle-website:latest
+          ports:
+            - containerPort: 3001
+
+          envFrom:
+            - secretRef:
+                name: cradle-secrets
