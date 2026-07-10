@@ -8,6 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /index.html
 spec:
   ingressClassName: nginx
   tls:
@@ -18,7 +19,7 @@ spec:
     - host: app.colcare.harrisconsult.org
       http:
         paths:
-          # 1. Serve static assets normally
+          # Static assets served normally
           - path: /assets/(.*)
             pathType: Prefix
             backend:
@@ -35,7 +36,7 @@ spec:
                 port:
                   number: 80
 
-          # 2. Rewrite SPA routes ONLY
+          # SPA routes rewritten to index.html
           - path: /(.*)
             pathType: Prefix
             backend:
@@ -43,7 +44,3 @@ spec:
                 name: colcare-app
                 port:
                   number: 80
-            # IMPORTANT: rewrite only SPA routes
-            # NOT static assets
-            annotations:
-              nginx.ingress.kubernetes.io/rewrite-target: /index.html
