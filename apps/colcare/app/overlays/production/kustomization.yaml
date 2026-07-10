@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: ghcr.io/harris-consult/colcare-app
   newName: ghcr.io/harris-consult/colcare-app
-  newTag: 5a9bcb5d0fa54732d78067a0335b5ac8d5e110ac
+  newTag: 3a23792f3606b211c2352101b30c6a2514e13165
