@@ -1,2 +1,8 @@
 resources:
-  - ../../base
+- ../../base
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: ghcr.io/harris-consult/cradle-website
+  newName: ghcr.io/harris-consult/cradle-website
+  newTag: a5eba81556e9e129159071f6df9d6ca9e7e9022d
