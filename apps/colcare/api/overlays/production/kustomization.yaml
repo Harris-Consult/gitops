@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: ghcr.io/harris-consult/colcare-api
   newName: ghcr.io/harris-consult/colcare-api
-  newTag: da107bc3df68ebc9ac7873dcb0e926b8dc118df5
+  newTag: 26b3727965d3a7459ef6ef77bd83e6dba4504119
