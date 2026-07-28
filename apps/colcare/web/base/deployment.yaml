@@ -28,7 +28,7 @@ spec:
         - name: colcare-web
           image: ghcr.io/harris-consult/colcare-web:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 4000
 
           envFrom:
             - secretRef:
