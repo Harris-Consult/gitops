@@ -8,19 +8,33 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
-  ingressClassName: nginx # Explicitly define your controller
+  ingressClassName: nginx
+
   tls:
-  - hosts:
-    - web.schoolrider.com
-    secretName: schoolrider-web-tls # Cert-manager will create this secret
+    - hosts:
+        - web.schoolrider.com
+        - schoolrider.com
+      secretName: schoolrider-web-tls
+
   rules:
-  - host: web.schoolrider.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: schoolrider-web # MUST match the metadata.name of your Service
-            port:
-              number: 80
+    - host: web.schoolrider.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: schoolrider-web
+                port:
+                  number: 80
+
+    - host: schoolrider.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: schoolrider-web
+                port:
+                  number: 80
