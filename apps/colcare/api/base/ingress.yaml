@@ -12,9 +12,20 @@ spec:
   tls:
     - hosts:
         - api.colcare.harrisconsult.org
+        - api.mycolcare.com
       secretName: colcare-api-tls
   rules:
     - host: api.colcare.harrisconsult.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: colcare-api
+                port:
+                  number: 80
+    - host: api.mycolcare.com
       http:
         paths:
           - path: /

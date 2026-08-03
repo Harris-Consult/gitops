@@ -12,9 +12,20 @@ spec:
   tls:
     - hosts:
         - web.colcare.harrisconsult.org
+        - web.mycolcare.com
       secretName: colcare-web-tls # Cert-manager will create this secret
   rules:
     - host: web.colcare.harrisconsult.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: colcare-web # MUST match the metadata.name of your Service
+                port:
+                  number: 80
+    - host: web.mycolcare.com
       http:
         paths:
           - path: /
