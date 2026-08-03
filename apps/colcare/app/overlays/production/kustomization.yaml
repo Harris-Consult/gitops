@@ -6,3 +6,6 @@ images:
 - name: ghcr.io/harris-consult/colcare-app
   newName: ghcr.io/harris-consult/colcare-app
   newTag: d9224e2ab0cd233ec860edd2aca212525dd1a116
+- name: ghcr.io/harris-consult/colcare-web
+  newName: ghcr.io/harris-consult/colcare-web
+  newTag: ba27e0303be09ba12f26644b195f432d3436a763
