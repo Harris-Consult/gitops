@@ -8,4 +8,4 @@ images:
   newTag: ab9c7d80ee52cec28829bce037994bf4ebaa5cbc
 - name: ghcr.io/harris-consult/colcare-web
   newName: ghcr.io/harris-consult/colcare-web
-  newTag: 61cddc389ff937b4f2a72dcd339c8606d144d0bd
+  newTag: 03630348a01e25838c0c82dc83b1e929e35f6c67
