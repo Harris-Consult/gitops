@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: ghcr.io/harris-consult/cradle-web
   newName: ghcr.io/harris-consult/cradle-web
-  newTag: 839ee6df0aa9ad4198bd81be0f459114e86e4835
+  newTag: 85ca281255dbd686597649b78f4f40c721f951e5
