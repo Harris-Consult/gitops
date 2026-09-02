@@ -1,2 +1,8 @@
 resources:
-  - ../../base
+- ../../base
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: ghcr.io/harris-consult/colcare-web
+  newName: ghcr.io/harris-consult/colcare-web
+  newTag: 80c18889d3df66da8eb4b7233d1aef6053dd6f7c
