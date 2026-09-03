@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: ghcr.io/harris-consult/schoolrider-api
   newName: ghcr.io/harris-consult/schoolrider-api
-  newTag: 3fa15326e3334a6fa5db93978efdfb8986260838
+  newTag: 5103a30cb3c34476b5800b7427ed6c29ae3288f1
